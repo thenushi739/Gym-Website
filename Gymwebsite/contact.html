@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    .navbar {
+      background-color: #111;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      margin-left: auto;
+    }
+
+    .nav-menu li {
+      margin-left: 20px;
+    }
+
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #f39c12;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      color: #2c3e50;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: 500;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background-color: #2e86de;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1b4f72;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-menu li {
+        margin: 10px 0;
+      }
+
+      form {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" class="logo">
+        <img src="src/img1.webp" alt="Fitness Logo">
+        <span>Fitness</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">Who we are</a></li>
+        <li><a href="team.html" class="nav-link">Meet the team</a></li>
+        <li><a href="membership.html" class="nav-link">Membership</a></li>
+        <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact Us</a></li>
+        <li><a href="signup.html" class="nav-link">Signup</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <h2>Contact Us</h2>
+  <form action="contact.php" method="POST">
+    <label>Name:</label>
+    <input type="text" name="name" required>
+
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <label>Subject:</label>
+    <input type="text" name="subject" required>
+
+    <label>Message:</label>
+    <textarea name="message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+</body>
+</html>

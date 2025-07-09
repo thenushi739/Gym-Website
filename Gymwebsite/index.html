@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fitness</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+.sidebar {
+  width: 220px;
+  background-color: #222;
+  color: white;
+  height: 100vh;
+  padding-top: 20px;
+  position: fixed;
+  left: -220px; /* hide it by default */
+  transition: left 0.3s ease;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+    .sidebar h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px 20px;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #444;
+    }
+
+    .main-content {
+      margin-left: 220px; /* same as sidebar width */
+      flex: 1;
+    }
+
+    .navbar {
+      background-color: #f8f8f8;
+      padding: 10px 0;
+    }
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.carousel-slide {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+}
+
+
+    .carousel-text h2 {
+      font-size: 36px;
+      margin: 0;
+    }
+
+    .carousel-text p {
+      font-size: 18px;
+    }
+
+    .navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.logo img {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: #333; /* Make visible */
+  text-decoration: none;
+  padding: 10px 15px;
+  font-weight: 500;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ff9800;
+  border-bottom: 2px solid #ff9800;
+}
+
+.nav-link.active {
+  color: #ff9800;
+  border-bottom: 2px solid #ff9800;
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none; /* Hide menu */
+    flex-direction: column;
+    background-color: #f8f8f8;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .nav-menu.show {
+    display: flex;
+  }
+
+  #toggleSidebar {
+    top: 10px;
+    left: 10px;
+  }
+}
+
+
+    /* Body remains the same */
+body {
+  display: flex;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden; /* prevent horizontal scroll when sidebar is offscreen */
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 220px;
+  background-color: #222;
+  color: white;
+  height: 100vh;
+  padding-top: 20px;
+  position: fixed;
+  left: -220px; /* hide sidebar initially */
+  transition: left 0.3s ease;
+  z-index: 1000;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #444;
+}
+
+/* Main content shifts right when sidebar active */
+.main-content {
+  margin-left: 0;
+  flex: 1;
+  transition: margin-left 0.3s ease;
+  padding: 20px;
+  min-height: 100vh;
+  background: #fafafa;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.main-content.shifted {
+  margin-left: 220px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #f8f8f8;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Sidebar toggle button */
+#toggleSidebar {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100; /* above sidebar */
+  background-color: #222;
+  border: none;
+  color: white;
+  font-size: 22px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+#toggleSidebar:hover {
+  background-color: #444;
+}
+
+/* Optional: Overlay effect when sidebar is open */
+body.sidebar-open::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 900;
+  transition: opacity 0.3s ease;
+}
+
+/* Hide overlay if sidebar not open */
+body:not(.sidebar-open)::before {
+  opacity: 0;
+  pointer-events: none;
+}
+
+  </style>
+</head>
+<body>
+<button id="toggleSidebar" style="margin-left: 20px;">☰ Menu</button>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Dashboard</h3>
+    <a href="login.php">Admin Dashboard</a>
+    <a href="userlogin.php">Your Dashboard</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Navigation bar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="#" class="logo">
+          <img src="src/logo1.jpg" alt="Fitness Logo">
+          <span>Fitness</span>
+        </a>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="about.html" class="nav-link">Who we are</a></li>
+          <li><a href="team.html" class="nav-link">Meet the team</a></li>
+          <li><a href="membership.html" class="nav-link">Membership</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+          <li><a href="signup.html" class="nav-link">Signup</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Carousel Section -->
+    <section class="carousel">
+      <div class="carousel-slide fade" style="background-image: url('src/img2.jpg');">
+        <div class="carousel-text">
+          <h2>Train Hard, Stay Strong</h2>
+          <p>Unlock your inner athlete with our world-class programs.</p>
+        </div>
+      </div>
+      <div class="carousel-slide fade" style="background-image: url('src/gym1.jpg');">
+        <div class="carousel-text">
+          <h2>Transform Your Body</h2>
+          <p>Join a community that supports and inspires.</p>
+        </div>
+      </div>
+      <div class="carousel-slide fade" style="background-image: url('src/gym2.webp');">
+        <div class="carousel-text">
+          <h2>Reach Your Goals</h2>
+          <p>Whether it's strength, stamina, or health—let's go!</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Carousel Script -->
+  <script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      let i;
+      const slides = document.getElementsByClassName("carousel-slide");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1; }
+      slides[slideIndex - 1].style.display = "flex";
+      setTimeout(showSlides, 4000);
+    }
+  </script>
+
+  <script>
+  const toggleButton = document.getElementById("toggleSidebar");
+const sidebar = document.querySelector(".sidebar");
+const mainContent = document.querySelector(".main-content");
+const body = document.body;
+
+toggleButton.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+  mainContent.classList.toggle("shifted");
+  body.classList.toggle("sidebar-open");
+});
+
+// Optional: close sidebar if user clicks outside sidebar on overlay
+body.addEventListener("click", (e) => {
+  if (body.classList.contains("sidebar-open")) {
+    // If click target is outside sidebar and button
+    if (!sidebar.contains(e.target) && e.target !== toggleButton) {
+      sidebar.classList.remove("active");
+      mainContent.classList.remove("shifted");
+      body.classList.remove("sidebar-open");
+    }
+  }
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Membership Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" class="logo">
+        <img src="src/img1.webp" alt="Fitness Logo">
+        <span>Fitness</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">Who we are</a></li>
+        <li><a href="team.html" class="nav-link">Meet the team</a></li>
+        <li><a href="membership.html" class="nav-link">Membership</a></li>
+        <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+        <li><a href="signup.html" class="nav-link"> Signup</a></li>
+      </ul>
+    </div>
+  </nav>
+
+    
+  <div class="form-container">
+    <h2>Membership Form</h2>
+    <form action="membership-save.php" method="POST">
+      <input type="hidden" name="plan" id="plan" value="">
+      <label>Name:</label><br>
+      <input type="text" name="name" required><br>
+      <label>Email:</label><br>
+      <input type="email" name="email" required><br>
+      <label>Phone:</label><br>
+       <input type="text" name="phone" required><br>
+      <label for="membership">Membership Plan:</label><br>
+<select name="membership" id="membership" required>
+  <option value="">-- Select Plan --</option>
+  <option value="BL">Basic Plan</option>
+  <option value="SP">Standard Plan</option>
+  <option value="PP">Premium Plan</option>
+</select><br><br>
+
+     
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const plan = urlParams.get('plan');
+    if (plan) {
+      document.getElementById('plan').value = plan;
+    }
+  </script>
+</body>
+</html>
